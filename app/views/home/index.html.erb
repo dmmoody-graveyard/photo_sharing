@@ -1,3 +1,7 @@
 <% content_for(:title, "Welcome | PhotoShare") %>
 
-<h1>Welcome to PhotoShare</h1>
+<h4>Welcome to PhotoShare</h4>
+
+<% @albums.each do |album| %>
+  <%= image_tag album.photo(:thumb) %>
+<% end %>

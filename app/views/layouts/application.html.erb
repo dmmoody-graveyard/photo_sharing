@@ -8,11 +8,29 @@
 </head>
 <body>
   <div class="container">
-      <% if logged_in? %>
-        <p>Welcome, <%= current_user.email %></p>
-      <% end %>
+    <div class="page-header">
+      <h1>PhotoShare</h1>
+    </div>
+    <nav class="navbar navbar-inverse">
+      <ul class="nav navbar-nav">
+        <li><%= link_to "Home", "/" %></li>
+        <% if logged_in? %>
+          <li><%= link_to "My Photos", user_path(current_user) %></li>
+          <li><%= link_to "Upload Photos", new_user_album_path(current_user) %></li>
+        <% end %>
+      </ul>
+      <div class="navbar-right">
+        <% if logged_in? %>
+          <span class="navbar-text">Welcome, <%= current_user.email %></span>
+          <button type="button" class="btn btn-default navbar-btn"><%= link_to 'Sign out', log_out_path %></button>
+        <% else %>
+          <button type="button" class="btn btn-default navbar-btn"><%= link_to 'Sign in', log_in_path %></button>
+        <% end %>
+      </div>
+    </nav>
     <%= flash[:alert] %>
     <%= flash[:notice] %>
+    <%= flash[:error] %>
     <%= yield %>
   </div>
 
